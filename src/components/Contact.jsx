@@ -47,13 +47,13 @@ export const Contact = () => {
   const emails = [SITE.email, SITE.ccEmail].filter(Boolean);
 
   return (
-    <div className="py-20">
+    <div className="py-14 sm:py-20">
       <div className="relative overflow-hidden rounded-3xl border border-neutral-800 bg-neutral-900/60 p-6 sm:p-10 lg:p-14">
         <div className="pointer-events-none absolute -left-24 top-0 h-72 w-96 rounded-full bg-purple-600/20 blur-3xl" />
-        <div className="relative grid gap-12 lg:grid-cols-5">
+        <div className="relative grid grid-cols-1 gap-10 lg:grid-cols-5 lg:gap-12 [&>*]:min-w-0">
           <div className="lg:col-span-2">
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-purple-400">Contact</p>
-            <h2 className="mb-4 text-4xl font-bold tracking-tight text-white md:text-5xl">Let's build your idea</h2>
+            <h2 className="mb-4 text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl">Let's build your idea</h2>
             <p className="mb-8 text-neutral-400">
               Tell us what you're building. We'll reply within 24 hours with questions or a quote, and set up a free call if it helps.
             </p>

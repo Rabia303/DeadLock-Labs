@@ -20,29 +20,31 @@ const chip = "rounded bg-neutral-800 px-2 py-0.5 text-xs text-purple-400";
 const SERVICE_ICONS = { web: FaCode, mobile: FaMobileAlt, ai: FaRobot, api: FaServer, automation: FaCogs, shop: FaShoppingCart };
 
 export const Services = () => (
-  <div className="py-20">
+  <div className="py-14 sm:py-20">
     <SectionHeading eyebrow="What we do" title="Services" subtitle="From first idea to launch — one team covering backend, frontend, mobile and AI." />
-    <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3">
       {SERVICES.map((s) => {
         const Icon = SERVICE_ICONS[s.icon] || FaCode;
         return (
-          <div key={s.title} className={`${card} flex flex-col p-6`}>
+          <div key={s.title} className={`${card} flex w-[82%] shrink-0 snap-center flex-col p-6 sm:w-auto`}>
             <span className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-purple-500/15 text-lg text-purple-300">
               <Icon />
             </span>
             <h3 className="mb-2 text-lg font-semibold text-white">{s.title}</h3>
             <p className="mb-5 text-sm leading-relaxed text-neutral-400">{s.text}</p>
-            <div className="mt-auto flex flex-wrap gap-1.5">
+            <div className="mt-auto hidden flex-wrap gap-1.5 sm:flex">
               {s.stack.map((t) => <span key={t} className={chip}>{t}</span>)}
             </div>
           </div>
         );
       })}
     </div>
+    <p className="mt-1 text-center text-xs text-neutral-500 sm:hidden">Swipe to see more →</p>
   </div>
 );
 
 const INITIAL_WORK = 9;
+const INITIAL_WORK_MOBILE = 4;
 
 // Card image. Screenshots sit in a browser frame on a soft gradient and scroll on hover;
 // phone screenshots are shown uncropped; placeholders fill the frame.
@@ -211,7 +213,7 @@ export const Work = () => {
   const visible = showAll ? filtered : filtered.slice(0, INITIAL_WORK);
 
   return (
-    <div className="py-20">
+    <div className="py-14 sm:py-20">
       <SectionHeading eyebrow="Selected work" title="Projects we've delivered" subtitle="Websites, business systems, AI products and mobile apps, from small business sites to platforms handling 100K+ records." />
 
       <div className="-mx-5 mb-10 flex gap-2 overflow-x-auto px-5 pb-2 sm:mx-0 sm:flex-wrap sm:justify-center sm:overflow-visible sm:px-0 sm:pb-0 [scrollbar-width:none]">
@@ -232,15 +234,15 @@ export const Work = () => {
         })}
       </div>
 
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {visible.map((w) => (
+      <div className="grid gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+        {visible.map((w, idx) => (
           <div
             key={w.slug}
             role="button"
             tabIndex={0}
             onClick={() => setOpen(w)}
             onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), setOpen(w))}
-            className={`${card} group flex cursor-pointer flex-col overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500`}
+            className={`${card} group cursor-pointer flex-col overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 ${!showAll && idx >= INITIAL_WORK_MOBILE ? "hidden sm:flex" : "flex"}`}
           >
             <div className="relative">
               <WorkImage w={w} />
@@ -262,8 +264,8 @@ export const Work = () => {
                 ))}
               </div>
               <h3 className="mb-2 font-semibold text-white">{w.title}</h3>
-              <p className="mb-4 text-sm text-neutral-400">{w.summary}</p>
-              <div className="mt-auto flex flex-wrap items-center gap-1.5">
+              <p className="mb-4 line-clamp-2 text-sm text-neutral-400 sm:line-clamp-none">{w.summary}</p>
+              <div className="mt-auto hidden flex-wrap items-center gap-1.5 sm:flex">
                 {w.stack.map((t) => <span key={t} className={chip}>{t}</span>)}
               </div>
               <span className="mt-4 inline-flex w-fit items-center gap-2 text-sm text-purple-300 transition group-hover:gap-3">
@@ -274,8 +276,8 @@ export const Work = () => {
         ))}
       </div>
 
-      {filtered.length > INITIAL_WORK && (
-        <div className="mt-10 text-center">
+      {filtered.length > INITIAL_WORK_MOBILE && (
+        <div className={`mt-10 text-center ${filtered.length > INITIAL_WORK ? "" : "sm:hidden"}`}>
           <button
             onClick={() => setShowAll((v) => !v)}
             className="rounded-full border border-purple-500/50 px-6 py-2.5 text-sm text-purple-300 transition hover:bg-purple-500/10"
@@ -291,21 +293,21 @@ export const Work = () => {
 };
 
 export const Process = () => (
-  <div className="py-20">
+  <div className="py-14 sm:py-20">
     <SectionHeading eyebrow="How we work" title="Process" subtitle="Simple, transparent and built around regular check-ins with you." />
-    <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+    <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
       {PROCESS.map((p, i) => (
-        <div key={p.title} className={`${card} p-6`}>
-          <div className="mb-4 bg-gradient-to-r from-pink-300 to-purple-500 bg-clip-text text-4xl font-bold text-transparent">
+        <div key={p.title} className={`${card} p-4 sm:p-6`}>
+          <div className="mb-3 bg-gradient-to-r from-pink-300 to-purple-500 bg-clip-text text-3xl font-bold text-transparent sm:mb-4 sm:text-4xl">
             0{i + 1}
           </div>
-          <h3 className="mb-2 text-lg font-semibold text-white">{p.title}</h3>
-          <p className="text-sm leading-relaxed text-neutral-400">{p.text}</p>
+          <h3 className="mb-1.5 font-semibold text-white sm:mb-2 sm:text-lg">{p.title}</h3>
+          <p className="line-clamp-3 text-xs leading-relaxed text-neutral-400 sm:line-clamp-none sm:text-sm">{p.text}</p>
         </div>
       ))}
     </div>
 
-    <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="mt-14 hidden gap-4 sm:grid sm:grid-cols-2 lg:grid-cols-4">
       {WHY_US.map((w) => (
         <div key={w.title} className="border-l-2 border-purple-500/60 pl-4">
           <h4 className="mb-1 font-medium text-white">{w.title}</h4>
@@ -317,7 +319,7 @@ export const Process = () => (
 );
 
 export const Team = () => (
-  <div className="py-20">
+  <div className="py-14 sm:py-20">
     <SectionHeading eyebrow="Who you'll work with" title="The Team" subtitle="No middlemen. You talk directly to the engineers building your product." />
     <div className="mx-auto grid max-w-4xl gap-6 md:grid-cols-2">
       {TEAM.map((m) => (
@@ -331,8 +333,8 @@ export const Team = () => (
               <p className="text-sm text-purple-300">{m.role}</p>
             </div>
           </div>
-          <p className="mb-5 text-sm leading-relaxed text-neutral-400">{m.bio}</p>
-          <div className="mb-5 flex flex-wrap gap-1.5">
+          <p className="mb-5 line-clamp-3 text-sm leading-relaxed text-neutral-400 sm:line-clamp-none">{m.bio}</p>
+          <div className="mb-5 hidden flex-wrap gap-1.5 sm:flex">
             {m.skills.map((s) => <span key={s} className={chip}>{s}</span>)}
           </div>
           <div className="flex gap-3">
@@ -356,26 +358,26 @@ export const Team = () => (
 const PLATFORM_ICONS = { upwork: SiUpwork, fiverr: SiFiverr, direct: FaHandshake };
 
 export const HireUs = () => (
-  <div className="py-20">
+  <div className="py-14 sm:py-20">
     <SectionHeading eyebrow="Hire us" title="Work with us your way" subtitle="Hire us through the platform you trust, or come to us directly." />
-    <div className="grid gap-5 md:grid-cols-3">
+    <div className="grid gap-3 sm:gap-5 md:grid-cols-3">
       {PLATFORMS.map((p) => {
         const Icon = PLATFORM_ICONS[p.id] || FaHandshake;
         const live = Boolean(p.url);
         const external = live && p.url.startsWith("http");
         return (
-          <div key={p.id} className={`${card} flex flex-col p-7 ${p.id === "direct" ? "border-purple-500/40" : ""}`}>
-            <span className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-neutral-800 text-2xl text-white">
+          <div key={p.id} className={`${card} grid grid-cols-[auto_1fr] items-center gap-x-4 gap-y-3 p-5 sm:flex sm:flex-col sm:items-stretch sm:p-7 ${p.id === "direct" ? "border-purple-500/40" : ""}`}>
+            <span className="row-span-2 flex h-12 w-12 items-center justify-center rounded-xl bg-neutral-800 text-2xl text-white sm:mb-5">
               <Icon />
             </span>
-            <h3 className="mb-2 text-lg font-semibold text-white">{p.name}</h3>
-            <p className="mb-6 text-sm text-neutral-400">{p.blurb}</p>
+            <h3 className="text-lg font-semibold text-white sm:mb-2">{p.name}</h3>
+            <p className="mb-6 hidden text-sm text-neutral-400 sm:block">{p.blurb}</p>
             {live ? (
               <a
                 href={p.url}
                 target={external ? "_blank" : undefined}
                 rel="noopener noreferrer"
-                className={`mt-auto inline-flex w-fit items-center gap-2 rounded-full px-5 py-2 text-sm font-medium transition ${
+                className={`inline-flex w-fit items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium transition sm:mt-auto sm:px-5 sm:py-2 ${
                   p.id === "direct" ? "bg-purple-600 text-white hover:bg-purple-500" : "border border-neutral-700 text-white hover:border-purple-500"
                 }`}
               >
@@ -396,7 +398,7 @@ export const HireUs = () => (
 export const Faq = () => {
   const [open, setOpen] = useState(0);
   return (
-    <div className="py-20">
+    <div className="py-14 sm:py-20">
       <SectionHeading eyebrow="Questions" title="FAQ" />
       <div className="mx-auto max-w-3xl space-y-3">
         {FAQ.map((f, i) => {
@@ -425,7 +427,7 @@ export const FoundingOffer = () => {
   if (!FOUNDING_OFFER.enabled) return null;
   const o = FOUNDING_OFFER;
   return (
-    <div className="py-16">
+    <div className="py-12 sm:py-16">
       <div className="relative overflow-hidden rounded-3xl border border-purple-500/40 bg-gradient-to-br from-purple-950/60 via-neutral-900 to-pink-950/30 p-8 sm:p-12">
         <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-purple-600/20 blur-3xl" />
         <div className="relative grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-center">
@@ -459,7 +461,7 @@ export const FoundingOffer = () => {
 export const Testimonials = () => {
   if (!TESTIMONIALS.length) return null;
   return (
-    <div className="py-20">
+    <div className="py-14 sm:py-20">
       <SectionHeading eyebrow="Client reviews" title="What clients say" subtitle="Real feedback from people we've built for." />
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {TESTIMONIALS.map((t) => (
@@ -513,18 +515,18 @@ export const TechStrip = () => {
 const INDUSTRY_ICONS = { food: FaUtensils, health: FaHeartbeat, shop: FaTshirt, home: FaHome, school: FaGraduationCap, rocket: FaRocket, heart: FaHandHoldingHeart, truck: FaTruck };
 
 export const Industries = () => (
-  <div className="py-20">
+  <div className="py-14 sm:py-20">
     <SectionHeading eyebrow="Who we help" title="Built for your industry" subtitle="Whatever your business, we know what your customers expect to find on your website." />
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
       {INDUSTRIES.map((i) => {
         const Icon = INDUSTRY_ICONS[i.icon] || FaRocket;
         return (
-          <div key={i.name} className={`${card} p-6`}>
-            <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-pink-500/20 to-purple-600/20 text-lg text-purple-300">
+          <div key={i.name} className={`${card} p-4 sm:p-6`}>
+            <span className="mb-3 flex h-10 w-10 sm:mb-4 sm:h-11 sm:w-11 items-center justify-center rounded-xl bg-gradient-to-br from-pink-500/20 to-purple-600/20 text-lg text-purple-300">
               <Icon />
             </span>
-            <h3 className="mb-1 font-semibold text-white">{i.name}</h3>
-            <p className="text-sm text-neutral-400">{i.text}</p>
+            <h3 className="mb-1 text-sm font-semibold text-white sm:text-base">{i.name}</h3>
+            <p className="hidden text-sm text-neutral-400 sm:block">{i.text}</p>
           </div>
         );
       })}
@@ -553,15 +555,15 @@ export const CurrencyToggle = () => {
 export const Pricing = () => {
   const cur = useCurrency();
   return (
-    <div className="py-20">
+    <div className="py-14 sm:py-20">
       <SectionHeading eyebrow="Pricing" title="Simple, honest pricing" subtitle="Starting prices for the most common projects. You get a fixed quote after a free call, with no hidden costs." />
       <div className="mb-10 flex justify-center"><CurrencyToggle /></div>
 
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden pt-4 lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-6 lg:overflow-visible lg:px-0 lg:pb-0">
         {PACKAGES.map((p) => (
           <div
             key={p.name}
-            className={`${card} relative flex flex-col p-7 ${p.popular ? "border-purple-500/60 bg-gradient-to-b from-purple-950/40 to-neutral-900/60 lg:-translate-y-3" : ""}`}
+            className={`${card} relative flex w-[85%] shrink-0 snap-center flex-col p-6 sm:w-[60%] sm:p-7 lg:w-auto ${p.popular ? "border-purple-500/60 bg-gradient-to-b from-purple-950/40 to-neutral-900/60 lg:-translate-y-3" : ""}`}
           >
             {p.popular && (
               <span className="absolute -top-3 left-7 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 px-3 py-1 text-xs font-medium text-white">
@@ -587,6 +589,7 @@ export const Pricing = () => {
           </div>
         ))}
       </div>
+      <p className="mt-1 text-center text-xs text-neutral-500 lg:hidden">Swipe to compare packages →</p>
 
       <div className="mt-10 grid gap-6 lg:grid-cols-2">
         <div className={`${card} p-7`}>

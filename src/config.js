@@ -35,6 +35,7 @@ export const AUDIT = {
   enabled: true,
   eyebrow: "Free website audit",
   title: "Is your website losing you customers?",
+  short: "Send us your website and get 5 practical fixes by email within 48 hours, free.",
   text: "Send us your website and we'll review it for free: speed, mobile experience, Google visibility and design. You'll get 5 practical fixes by email within 48 hours, no strings attached.",
   checks: ["Page speed & performance", "Mobile experience", "Google search visibility", "Design & trust signals", "Contact & conversion flow"],
 };
@@ -309,6 +310,7 @@ export const HERO = {
   eyebrow: "Taking on new projects",
   title: "Websites that",
   highlight: "bring you customers.",
+  short: "Fast, mobile-friendly websites, online stores, apps and AI tools for growing businesses.",
   text: "We design and build fast, mobile-friendly websites and online stores for restaurants, clinics, shops and startups, plus web apps, mobile apps and AI tools when you're ready to grow.",
   previews: ["luxurystay", "muhafiz", "talktotext", "multivox"],
   phone: "laptop-harbour", // mobile project shown in the phone mockup

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FaArrowUp, FaWhatsapp } from "react-icons/fa";
 import Audit from "./components/Audit";
+import BottomNav from "./components/BottomNav";
 import { SITE } from "./config";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -55,7 +56,7 @@ const App = () => {
 
       <Navbar />
 
-      <main className="container mx-auto px-5 pt-20 sm:px-8">
+      <main className="container mx-auto px-5 pb-20 pt-20 sm:px-8 lg:pb-0">
         <Section id="home" animate={false}><Hero /></Section>
         <Section id="stack"><TechStrip /></Section>
         <Section id="services"><Services /></Section>
@@ -77,18 +78,20 @@ const App = () => {
         <a
           href="#home"
           aria-label="Back to top"
-          className="fixed bottom-24 right-6 z-50 hidden h-11 w-11 items-center justify-center rounded-full bg-neutral-800 text-white shadow-lg transition hover:bg-purple-600 sm:flex"
+          className="fixed bottom-24 right-6 z-50 hidden h-11 w-11 items-center justify-center rounded-full bg-neutral-800 text-white shadow-lg transition hover:bg-purple-600 lg:flex"
         >
           <FaArrowUp />
         </a>
       )}
+      <BottomNav />
+
       {SITE.whatsapp && (
         <a
           href={`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent("Hi Deadlock Labs! I'd like to discuss a project.")}`}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Chat with us on WhatsApp"
-          className="group fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-3xl text-white shadow-[0_8px_30px_rgba(37,211,102,0.45)] transition hover:scale-105"
+          className="group fixed bottom-[calc(4.75rem+env(safe-area-inset-bottom))] right-4 z-50 flex h-12 w-12 text-2xl lg:bottom-5 lg:right-5 lg:h-14 lg:w-14 lg:text-3xl items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_8px_30px_rgba(37,211,102,0.45)] transition hover:scale-105"
         >
           <span className="absolute inset-0 animate-ping rounded-full bg-[#25D366] opacity-20" />
           <FaWhatsapp className="relative" />

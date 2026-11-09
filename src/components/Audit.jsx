@@ -30,17 +30,18 @@ const Audit = () => {
   };
 
   return (
-    <div className="py-16">
+    <div className="py-12 sm:py-16">
       <div className="relative overflow-hidden rounded-3xl border border-purple-500/30 bg-gradient-to-br from-purple-950/50 via-neutral-900 to-pink-950/30 p-7 sm:p-12">
         <div className="pointer-events-none absolute -bottom-24 -right-16 h-72 w-72 rounded-full bg-purple-600/20 blur-3xl" />
-        <div className="relative grid gap-10 lg:grid-cols-2 lg:items-center">
+        <div className="relative grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-center [&>*]:min-w-0">
           <div>
             <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-purple-500/15 px-3 py-1 text-sm text-purple-300">
               <FaSearch className="text-xs" /> {AUDIT.eyebrow}
             </span>
-            <h2 className="mb-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">{AUDIT.title}</h2>
-            <p className="mb-6 leading-relaxed text-neutral-400">{AUDIT.text}</p>
-            <ul className="grid gap-2.5 text-sm text-neutral-300 sm:grid-cols-2">
+            <h2 className="mb-4 text-2xl font-bold tracking-tight text-white sm:text-4xl">{AUDIT.title}</h2>
+            <p className="leading-relaxed text-neutral-400 sm:hidden">{AUDIT.short}</p>
+            <p className="mb-6 hidden leading-relaxed text-neutral-400 sm:block">{AUDIT.text}</p>
+            <ul className="hidden gap-2.5 text-sm text-neutral-300 sm:grid sm:grid-cols-2">
               {AUDIT.checks.map((c) => (
                 <li key={c} className="flex items-center gap-2.5"><FaCheck className="shrink-0 text-xs text-purple-400" /> {c}</li>
               ))}

@@ -113,9 +113,10 @@ const Hero = () => (
           </span>
         </h1>
 
-        <p className="mx-auto mt-7 max-w-xl text-lg leading-relaxed text-neutral-400 lg:mx-0">{HERO.text}</p>
+        <p className="mx-auto mt-5 max-w-xl leading-relaxed text-neutral-400 sm:hidden">{HERO.short}</p>
+        <p className="mx-auto mt-7 hidden max-w-xl text-lg leading-relaxed text-neutral-400 sm:block lg:mx-0">{HERO.text}</p>
 
-        <div className="mt-9 flex flex-wrap justify-center gap-3 lg:justify-start">
+        <div className="mt-7 flex flex-wrap justify-center gap-3 sm:mt-9 lg:justify-start">
           <a
             href="#contact"
             className="rounded-full bg-purple-600 px-7 py-3 font-medium text-white shadow-[0_0_30px_-6px_rgba(168,85,247,0.7)] transition hover:bg-purple-500"
@@ -127,7 +128,7 @@ const Hero = () => (
           </a>
         </div>
 
-        <ul className="mt-7 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-neutral-400 lg:justify-start">
+        <ul className="mt-7 hidden flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-neutral-400 sm:flex lg:justify-start">
           <li className="flex items-center gap-2"><FaGlobeAsia className="text-purple-400" /> {SITE.location}</li>
           <li className="flex items-center gap-2"><FaCheckCircle className="text-purple-400" /> Free consultation</li>
           <li className="flex items-center gap-2"><FaCheckCircle className="text-purple-400" /> You own the code</li>
