@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /demos/
 
-Sitemap: https://deadlocklabs.vercel.app/sitemap.xml
+Sitemap: https://dead-lock-labs.vercel.app/sitemap.xml

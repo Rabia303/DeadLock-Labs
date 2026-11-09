@@ -19,7 +19,7 @@ export const SITE = {
   whatsapp: "923241458873", // country code, no + or spaces — shows a WhatsApp button
   linkedin: "", // company page URL, once created
   github: "",   // org URL, once created
-  url: "https://deadlocklabs.vercel.app", // live site address — update once deployed / on your domain
+  url: "https://dead-lock-labs.vercel.app", // live site address — update once deployed / on your domain
 };
 
 // ── Forms ───────────────────────────────────────────────────

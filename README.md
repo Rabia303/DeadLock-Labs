@@ -57,7 +57,7 @@ Without a key, forms fall back to opening the visitor's email app.
 
 ## Site address
 
-The live URL is set to `https://deadlocklabs.vercel.app`. If you deploy elsewhere or buy a domain, update it in:
+The live URL is set to `https://dead-lock-labs.vercel.app`. If you deploy elsewhere or buy a domain, update it in:
 `index.html` (canonical, og tags, structured data), `public/robots.txt`, `public/sitemap.xml` and `SITE.url` in `src/config.js`.
 
 ## Leftover files
