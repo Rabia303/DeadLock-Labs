@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="480 50 750 750"><rect x="480" y="50" width="750" height="750" rx="160" fill="#0f1117"/><g transform="translate(0 50)"><defs>
+<linearGradient id="dlNavy" gradientUnits="userSpaceOnUse" x1="600" y1="180" x2="1100" y2="600"><stop offset="0" stop-color="#24397f"/><stop offset="1" stop-color="#2a4cb0"/></linearGradient>
+<linearGradient id="dlPink" gradientUnits="userSpaceOnUse" x1="580" y1="0" x2="960" y2="0"><stop offset="0" stop-color="#f00ee0"/><stop offset="1" stop-color="#8a1ff0"/></linearGradient>
+<linearGradient id="dlPurple" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#d40fe8"/><stop offset=".55" stop-color="#8b4dfb"/><stop offset="1" stop-color="#2f7af7"/></linearGradient>
+<linearGradient id="dlBlue" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0a78ee"/><stop offset="1" stop-color="#07a6fb"/></linearGradient>
+<clipPath id="dlCut"><path d="M500 100 H1200 V826 L500 150 Z"/></clipPath>
+</defs>
+<g fill="none" stroke-width="52" stroke-linejoin="miter">
+<path d="M625 352 V212 H900" stroke="url(#dlNavy)"/>
+<path d="M940 252 A136 136 0 0 1 940 568 H790" stroke="url(#dlNavy)"/>
+<path d="M955 228 A150 150 0 0 1 1100 380" stroke="url(#dlBlue)"/>
+</g>
+<path d="M1044 384 H1156 L1100 446 Z" fill="url(#dlBlue)"/>
+<path d="M617 594 V392" stroke="url(#dlPink)" stroke-width="52" fill="none"/>
+<path d="M561 396 L617 326 L673 396 Z" fill="#f00ee0"/>
+<path d="M591 568 H770 C870 568 922 500 922 398" stroke="url(#dlPink)" stroke-width="52" fill="none"/>
+<path d="M757 470 C757 300 820 234 892 232" clip-path="url(#dlCut)" stroke="url(#dlPurple)" stroke-width="56" fill="none"/>
+<path d="M890 170 L958 232 L890 294 Z" fill="#3d72f7"/>
+</g></svg>

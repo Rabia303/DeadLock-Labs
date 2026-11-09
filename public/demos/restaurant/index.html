@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ember & Spice · BBQ and Desi Kitchen (Concept demo by Deadlock Labs)</title>
+<meta name="description" content="Concept restaurant website built by Deadlock Labs: menu, table booking, WhatsApp ordering and location." />
+<meta name="robots" content="noindex" />
+<style>
+  :root { --bg:#120c08; --card:#1d140e; --line:#3a2a1e; --text:#f5ebe0; --muted:#bfa995; --accent:#f59e0b; --accent2:#ea580c; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--text); font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; line-height:1.6; }
+  a { color:inherit; text-decoration:none; }
+  .serif { font-family:Georgia,"Times New Roman",serif; }
+  .wrap { max-width:1140px; margin:0 auto; padding:0 22px; }
+  .ribbon { background:#000; color:#d4d4d4; font-size:13px; text-align:center; padding:8px 12px; }
+  .ribbon a { color:#c4b5fd; font-weight:600; }
+  nav { position:sticky; top:0; z-index:20; background:rgba(18,12,8,.85); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+  nav .wrap { display:flex; align-items:center; justify-content:space-between; height:68px; }
+  .brand { font-size:22px; font-weight:700; letter-spacing:.5px; }
+  .brand span { color:var(--accent); }
+  .links { display:flex; gap:28px; font-size:15px; color:var(--muted); }
+  .links a:hover { color:var(--text); }
+  .btn { display:inline-block; background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#1a0f05; font-weight:700; padding:12px 24px; border-radius:999px; border:0; cursor:pointer; font-size:15px; }
+  .btn.ghost { background:transparent; color:var(--text); border:1px solid var(--line); }
+  .menu-toggle { display:none; background:none; border:0; color:var(--text); font-size:26px; cursor:pointer; }
+  .hero { position:relative; overflow:hidden; padding:110px 0 120px; background:
+      radial-gradient(ellipse 60% 70% at 80% 30%, rgba(234,88,12,.35), transparent 70%),
+      radial-gradient(ellipse 50% 60% at 10% 90%, rgba(245,158,11,.18), transparent 70%); }
+  .hero .wrap { display:grid; grid-template-columns:1.1fr .9fr; gap:50px; align-items:center; }
+  .tag { display:inline-block; color:var(--accent); border:1px solid rgba(245,158,11,.4); border-radius:999px; padding:5px 14px; font-size:13px; letter-spacing:1px; text-transform:uppercase; }
+  h1 { font-size:clamp(42px,6vw,72px); line-height:1.02; margin:22px 0; }
+  h1 em { color:var(--accent); font-style:italic; }
+  .lead { color:var(--muted); font-size:18px; max-width:520px; }
+  .cta { display:flex; gap:12px; margin-top:32px; flex-wrap:wrap; }
+  .facts { display:flex; gap:34px; margin-top:42px; flex-wrap:wrap; }
+  .facts b { display:block; font-size:26px; }
+  .facts span { color:var(--muted); font-size:13px; }
+  .plate { aspect-ratio:1; border-radius:50%; position:relative; background:
+      radial-gradient(circle at 50% 50%, #3b2416 0 38%, transparent 39%),
+      conic-gradient(from 20deg, #7c2d12, #c2410c, #f59e0b, #b45309, #7c2d12);
+      box-shadow:0 40px 90px -20px rgba(234,88,12,.55), inset 0 0 0 14px #2a1a10; }
+  .plate::after { content:""; position:absolute; inset:24%; border-radius:50%; background:
+      radial-gradient(circle at 35% 40%, #fbbf24 0 8%, transparent 9%),
+      radial-gradient(circle at 62% 35%, #84cc16 0 6%, transparent 7%),
+      radial-gradient(circle at 55% 65%, #dc2626 0 9%, transparent 10%),
+      radial-gradient(circle at 30% 68%, #f97316 0 7%, transparent 8%),
+      radial-gradient(circle, #5b3a22, #3b2416); }
+  .picks { background:rgba(29,20,14,.9); border:1px solid var(--line); border-radius:24px; padding:26px; box-shadow:0 40px 90px -30px rgba(234,88,12,.55); }
+  .picks-head { display:flex; justify-content:space-between; font-size:14px; color:var(--muted); margin-bottom:10px; }
+  .picks-head b { color:#4ade80; font-weight:600; }
+  .pick { display:flex; align-items:center; gap:16px; padding:16px 0; border-bottom:1px solid var(--line); }
+  .pick .dot { width:58px; height:58px; border-radius:50%; flex-shrink:0; box-shadow:inset 0 0 0 6px #2a1a10; }
+  .pick h4 { font-size:17px; } .pick p { color:var(--muted); font-size:13px; }
+  .pick span { margin-left:auto; color:var(--accent); font-weight:700; white-space:nowrap; }
+  .badge { position:absolute; background:var(--card); border:1px solid var(--line); border-radius:14px; padding:12px 16px; font-size:14px; box-shadow:0 20px 40px -10px rgba(0,0,0,.6); }
+  .badge b { color:var(--accent); }
+  section { padding:90px 0; }
+  .head { text-align:center; margin-bottom:46px; }
+  .head h2 { font-size:clamp(32px,4vw,46px); }
+  .head p { color:var(--muted); margin-top:8px; }
+  .tabs { display:flex; justify-content:center; gap:10px; margin-bottom:34px; flex-wrap:wrap; }
+  .tabs button { background:var(--card); color:var(--muted); border:1px solid var(--line); padding:9px 20px; border-radius:999px; cursor:pointer; font-size:14px; }
+  .tabs button.on { background:var(--accent); color:#1a0f05; border-color:var(--accent); font-weight:700; }
+  .menu { display:grid; grid-template-columns:repeat(2,1fr); gap:16px 44px; max-width:920px; margin:0 auto; }
+  .item { display:flex; gap:14px; align-items:baseline; padding:16px 0; border-bottom:1px dashed var(--line); }
+  .item h4 { font-size:17px; }
+  .item p { color:var(--muted); font-size:14px; }
+  .item .price { margin-left:auto; color:var(--accent); font-weight:700; white-space:nowrap; }
+  .hot { font-size:11px; background:rgba(220,38,38,.2); color:#fca5a5; padding:2px 8px; border-radius:999px; margin-left:6px; vertical-align:middle; }
+  .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:20px; padding:28px; }
+  .card .ico { width:48px; height:48px; border-radius:14px; display:grid; place-items:center; background:rgba(245,158,11,.12); color:var(--accent); margin-bottom:18px; }
+  .card h3 { margin-bottom:6px; }
+  .card p { color:var(--muted); font-size:15px; }
+  .book { background:linear-gradient(135deg,#2a1608,#1d140e); border:1px solid var(--line); border-radius:28px; padding:50px; display:grid; grid-template-columns:1fr 1fr; gap:40px; }
+  .book h2 { font-size:40px; line-height:1.1; }
+  form { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  input, select { width:100%; background:#120c08; border:1px solid var(--line); color:var(--text); border-radius:12px; padding:13px 14px; font-size:15px; font-family:inherit; }
+  form .full { grid-column:1/-1; }
+  .reviews { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  .stars { color:var(--accent); letter-spacing:2px; }
+  .visit { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  .map { border-radius:20px; min-height:300px; border:1px solid var(--line); background:
+      linear-gradient(90deg, transparent 49%, rgba(245,158,11,.12) 50%, transparent 51%) 0 0/60px 60px,
+      linear-gradient(0deg, transparent 49%, rgba(245,158,11,.12) 50%, transparent 51%) 0 0/60px 60px, #1a120c; display:grid; place-items:center; }
+  .pin { background:var(--accent); color:#1a0f05; font-weight:700; padding:10px 16px; border-radius:999px; box-shadow:0 0 0 10px rgba(245,158,11,.15); }
+  .hours li { display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--line); list-style:none; color:var(--muted); }
+  .hours li b { color:var(--text); font-weight:500; }
+  footer { border-top:1px solid var(--line); padding:34px 0; color:var(--muted); font-size:14px; }
+  footer .wrap { display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+  .wa { position:fixed; right:20px; bottom:20px; width:58px; height:58px; border-radius:50%; background:#22c55e; display:grid; place-items:center; box-shadow:0 10px 30px rgba(34,197,94,.45); z-index:30; }
+  .toast { position:fixed; left:50%; bottom:28px; transform:translateX(-50%) translateY(20px); opacity:0; visibility:hidden; background:#fff; color:#111; padding:12px 20px; border-radius:12px; font-size:14px; transition:all .35s; z-index:40; box-shadow:0 10px 30px rgba(0,0,0,.4); }
+  .toast.show { transform:translateX(-50%) translateY(0); opacity:1; visibility:visible; }
+  @media (max-width:860px) {
+    .links { display:none; position:absolute; top:68px; left:0; right:0; flex-direction:column; gap:0; background:var(--bg); border-bottom:1px solid var(--line); }
+    .links.open { display:flex; }
+    .links a { padding:14px 22px; border-top:1px solid var(--line); }
+    .menu-toggle { display:block; }
+    nav .btn { display:none; }
+    .hero { padding:60px 0 80px; }
+    .hero .wrap, .book, .visit { grid-template-columns:1fr; }
+    .plate-box { max-width:340px; margin:0 auto; }
+    .menu, .cards, .reviews { grid-template-columns:1fr; }
+    .book { padding:30px 22px; }
+    form { grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="ribbon">Concept website designed &amp; built by <a href="/">Deadlock Labs</a>. Want one like this for your restaurant? <a href="/#contact">Get a quote →</a></div>
+
+<nav>
+  <div class="wrap">
+    <a href="#" class="brand serif">Ember <span>&amp;</span> Spice</a>
+    <div class="links" id="links">
+      <a href="#menu">Menu</a><a href="#why">Why us</a><a href="#book">Reservations</a><a href="#visit">Visit</a>
+    </div>
+    <a href="#book" class="btn">Book a table</a>
+    <button class="menu-toggle" aria-label="Menu" onclick="document.getElementById('links').classList.toggle('open')">☰</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <span class="tag">Charcoal BBQ · Desi Kitchen</span>
+      <h1 class="serif">Slow-grilled flavour, <em>straight off the coals.</em></h1>
+      <p class="lead">Seekh kebabs, malai boti and karahi cooked fresh to order. Dine in with family, or order on WhatsApp and pick up in 25 minutes.</p>
+      <div class="cta">
+        <a href="#menu" class="btn">See the menu</a>
+        <a href="#" class="btn ghost" data-demo>Order on WhatsApp</a>
+      </div>
+      <div class="facts">
+        <div><b>4.8★</b><span>1,200+ Google reviews</span></div>
+        <div><b>25 min</b><span>Average pickup time</span></div>
+        <div><b>Family</b><span>Hall seats 120</span></div>
+      </div>
+    </div>
+    <div class="plate-box">
+      <div class="picks">
+        <div class="picks-head"><span>🔥 Chef's picks tonight</span><b>Open till 1am</b></div>
+        <div class="pick"><div class="dot" style="background:conic-gradient(#7c2d12,#ea580c,#f59e0b,#7c2d12)"></div><div><h4>Mutton Karahi</h4><p>Peshawari style, served sizzling</p></div><span>Rs 2,900</span></div>
+        <div class="pick"><div class="dot" style="background:conic-gradient(#78350f,#d97706,#fde68a,#78350f)"></div><div><h4>Malai Boti</h4><p>Cream-marinated, charcoal grilled</p></div><span>Rs 1,150</span></div>
+        <div class="pick"><div class="dot" style="background:conic-gradient(#14532d,#65a30d,#facc15,#14532d)"></div><div><h4>BBQ Platter for 4</h4><p>Seekh, boti, tikka &amp; chops</p></div><span>Rs 4,200</span></div>
+        <a href="#" class="btn" data-demo style="width:100%;text-align:center;margin-top:18px">Order these on WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="menu">
+  <div class="wrap">
+    <div class="head"><h2 class="serif">Our Menu</h2><p>Prices include tax. Spice levels adjusted on request.</p></div>
+    <div class="tabs" id="tabs">
+      <button class="on" data-tab="bbq">BBQ</button><button data-tab="karahi">Karahi &amp; Handi</button><button data-tab="rice">Rice &amp; Breads</button><button data-tab="drinks">Drinks &amp; Desserts</button>
+    </div>
+    <div class="menu" id="menuList"></div>
+  </div>
+</section>
+
+<section id="why" style="padding-top:20px">
+  <div class="wrap">
+    <div class="cards">
+      <div class="card"><div class="ico">🔥</div><h3>Real charcoal</h3><p>Every kebab and tikka is grilled over coals, never gas, for that smoky finish.</p></div>
+      <div class="card"><div class="ico">🥩</div><h3>Fresh every morning</h3><p>Meat sourced daily and marinated overnight in our own spice blends.</p></div>
+      <div class="card"><div class="ico">🎉</div><h3>Events &amp; catering</h3><p>Birthdays, office lunches and dholkis, with set menus for 20 to 300 guests.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="book">
+  <div class="wrap">
+    <div class="book">
+      <div>
+        <span class="tag">Reservations</span>
+        <h2 class="serif" style="margin:18px 0 12px">Reserve your table in 30 seconds.</h2>
+        <p style="color:var(--muted)">We'll confirm on WhatsApp within 10 minutes. For groups over 15, mention it in the notes and we'll set up the family hall.</p>
+      </div>
+      <form id="bookForm">
+        <input required placeholder="Your name" />
+        <input required placeholder="Phone number" type="tel" />
+        <input required type="date" />
+        <select><option>7:00 pm</option><option>8:00 pm</option><option>9:00 pm</option><option>10:00 pm</option></select>
+        <select class="full"><option>2 guests</option><option>4 guests</option><option>6 guests</option><option>8+ guests</option></select>
+        <button class="btn full" type="submit">Confirm booking</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:20px">
+  <div class="wrap">
+    <div class="head"><h2 class="serif">What guests say</h2></div>
+    <div class="reviews">
+      <div class="card"><div class="stars">★★★★★</div><p style="margin:12px 0">"The malai boti melts in your mouth. Booked on the site and our table was ready the moment we walked in."</p><b>Sample review</b></div>
+      <div class="card"><div class="stars">★★★★★</div><p style="margin:12px 0">"Ordered karahi on WhatsApp for a family dinner. Hot, on time and plenty for six people."</p><b>Sample review</b></div>
+      <div class="card"><div class="stars">★★★★★</div><p style="margin:12px 0">"Hosted my parents' anniversary in the family hall. Staff handled everything."</p><b>Sample review</b></div>
+    </div>
+  </div>
+</section>
+
+<section id="visit">
+  <div class="wrap visit">
+    <div class="map"><span class="pin">📍 Ember &amp; Spice</span></div>
+    <div class="card">
+      <h3 class="serif" style="font-size:28px;margin-bottom:6px">Visit us</h3>
+      <p style="color:var(--muted);margin-bottom:18px">Main Boulevard, Food Street · Free parking</p>
+      <ul class="hours">
+        <li>Monday – Thursday <b>12pm – 12am</b></li>
+        <li>Friday <b>2pm – 1am</b></li>
+        <li>Saturday – Sunday <b>12pm – 1am</b></li>
+      </ul>
+      <div class="cta"><a href="#" class="btn" data-demo>Get directions</a><a href="#" class="btn ghost" data-demo>Call us</a></div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>© Ember &amp; Spice · fictional restaurant for demo purposes</span><span>Website by <a href="/" style="color:#c4b5fd">Deadlock Labs</a></span></div></footer>
+
+<a href="#" class="wa" aria-label="WhatsApp" data-demo><svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 .9c.3.2.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg></a>
+<div class="toast" id="toast">This is a demo site, so nothing was sent. Your real site would send this straight to WhatsApp.</div>
+
+<script>
+  const MENU = {
+    bbq: [["Chicken Seekh Kebab","4 skewers, mint chutney","Rs 950",1],["Malai Boti","Cream-marinated chicken, charred","Rs 1,150"],["Beef Bihari Boti","Overnight marinade, onion rings","Rs 1,250",1],["Chicken Tikka","Leg or chest, lemon & masala","Rs 690"],["Mutton Chops","Lahori style, 4 pieces","Rs 1,850"],["BBQ Platter","For 4: seekh, boti, tikka, chops","Rs 4,200"]],
+    karahi: [["Chicken Karahi","Half / full, tomato & green chilli","Rs 1,600"],["Mutton Karahi","Peshawari style, served sizzling","Rs 2,900",1],["Chicken Makhni Handi","Butter-rich, boneless","Rs 1,750"],["Daal Mash","Tempered with garlic","Rs 650"]],
+    rice: [["Chicken Biryani","Sindhi style, raita & salad","Rs 750"],["Kabuli Pulao","Raisins, carrots, mutton","Rs 1,100"],["Garlic Naan","Fresh from the tandoor","Rs 120"],["Roghni Naan","Sesame, butter brushed","Rs 140"]],
+    drinks: [["Mint Margarita","Fresh mint & lime","Rs 390"],["Peshawari Kahwa","Green tea, cardamom","Rs 220"],["Gulab Jamun","3 pieces, warm","Rs 350"],["Kheer","Slow-cooked, pistachio","Rs 380"]],
+  };
+  const list = document.getElementById("menuList");
+  const render = (k) => list.innerHTML = MENU[k].map(([n,d,p,h]) =>
+    `<div class="item"><div><h4>${n}${h ? '<span class="hot">Spicy</span>' : ""}</h4><p>${d}</p></div><span class="price">${p}</span></div>`).join("");
+  render("bbq");
+  document.getElementById("tabs").addEventListener("click", (e) => {
+    const b = e.target.closest("button"); if (!b) return;
+    document.querySelectorAll("#tabs button").forEach((x) => x.classList.toggle("on", x === b));
+    render(b.dataset.tab);
+  });
+  const toast = document.getElementById("toast");
+  const show = () => { toast.classList.add("show"); setTimeout(() => toast.classList.remove("show"), 3200); };
+  document.querySelectorAll("[data-demo]").forEach((a) => a.addEventListener("click", (e) => { e.preventDefault(); show(); }));
+  document.getElementById("bookForm").addEventListener("submit", (e) => { e.preventDefault(); show(); e.target.reset(); });
+  document.querySelectorAll(".links a").forEach((a) => a.addEventListener("click", () => document.getElementById("links").classList.remove("open")));
+</script>
+</body>
+</html>
