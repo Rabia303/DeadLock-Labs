@@ -27,7 +27,7 @@ export const SITE = {
 // emailed to you) and paste it below. Contact and audit forms then arrive in that
 // inbox directly. Leave it empty and forms open the visitor's email app instead.
 export const FORMS = {
-  web3formsKey: "",
+  web3formsKey: "9a66b372-a8f8-4e24-933f-94878a0c7795",
 };
 
 // Free website audit section.
