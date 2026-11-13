@@ -308,8 +308,8 @@ export const WORK = PROJECTS.map((p) => ({ demo: "", device: "desktop", ...p, ..
 // Hero: headline + the projects shown in the stacked previews (by slug, front card first).
 export const HERO = {
   eyebrow: "Taking on new projects",
-  title: "Websites that",
-  highlight: "bring you customers.",
+  title: "We turn ideas into",
+  highlight: "software that works.",
   short: "Fast, mobile-friendly websites, online stores, apps and AI tools for growing businesses.",
   text: "We design and build fast, mobile-friendly websites and online stores for restaurants, clinics, shops and startups, plus web apps, mobile apps and AI tools when you're ready to grow.",
   previews: ["luxurystay", "muhafiz", "talktotext", "multivox"],
